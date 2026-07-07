@@ -1,0 +1,113 @@
+.footer {
+  position: relative;
+  background: var(--ink-2);
+  color: color-mix(in srgb, var(--paper) 80%, transparent);
+  overflow: hidden;
+  z-index: 2;
+}
+.footer__top {
+  position: relative;
+  border-top: 3px solid transparent;
+  border-image: linear-gradient(90deg, var(--hornbill), var(--casque), var(--kenyalang)) 1;
+}
+.footer__inner {
+  max-width: var(--maxw);
+  margin-inline: auto;
+  padding: clamp(3.5rem, 7vw, 6rem) clamp(1.25rem, 5vw, 3rem) 2rem;
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr 1.1fr;
+  gap: clamp(2rem, 4vw, 3.5rem);
+}
+@media (max-width: 900px) { .footer__inner { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 560px) { .footer__inner { grid-template-columns: 1fr; } }
+
+.footer__brand { display: flex; flex-direction: column; gap: 1.1rem; }
+.footer__brand img { width: 64px; height: 64px; object-fit: contain; }
+.footer__brand h3 { color: var(--paper); font-size: 1.4rem; }
+.footer__brand p { font-size: 0.94rem; line-height: 1.65; max-width: 34ch; color: color-mix(in srgb, var(--paper) 66%, transparent); }
+
+.footer__col h4 {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--casque);
+  margin-bottom: 1.1rem;
+  font-weight: 400;
+}
+.footer__col p, .footer__col a { font-size: 0.92rem; line-height: 1.6; color: color-mix(in srgb, var(--paper) 74%, transparent); }
+.footer__col a { transition: color 180ms ease; display: inline-block; }
+@media (hover: hover) and (pointer:fine) { .footer__col a:hover { color: var(--casque); } }
+.footer__col .row { margin-bottom: 0.85rem; }
+.footer__col .row strong { color: var(--paper); font-weight: 600; display: block; font-size: 0.86rem; }
+
+.footer__socials { display: flex; gap: 0.6rem; margin-top: 0.4rem; flex-wrap: wrap; }
+.footer__social {
+  width: 42px; height: 42px;
+  border-radius: 12px;
+  display: grid; place-items: center;
+  background: color-mix(in srgb, var(--paper) 8%, transparent);
+  color: color-mix(in srgb, var(--paper) 82%, transparent);
+  transition: transform 200ms var(--ease-out), background-color 220ms ease, color 220ms ease;
+}
+@media (hover: hover) and (pointer:fine) {
+  .footer__social:hover { background: var(--hornbill); color: #fff; transform: translateY(-3px); }
+}
+.footer__social:active { transform: scale(0.94); }
+
+.footer__map {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  margin-top: 1rem;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--paper) 14%, transparent);
+  aspect-ratio: 16 / 10;
+  background:
+    radial-gradient(60% 80% at 30% 30%, color-mix(in srgb, var(--river) 30%, transparent), transparent 70%),
+    linear-gradient(140deg, #123, #0b1f1a);
+  transition: transform 240ms var(--ease-out), border-color 240ms ease;
+}
+.footer__map-grid {
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(color-mix(in srgb, var(--paper) 10%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in srgb, var(--paper) 10%, transparent) 1px, transparent 1px);
+  background-size: 26px 26px;
+  -webkit-mask-image: radial-gradient(80% 80% at 50% 50%, #000, transparent);
+          mask-image: radial-gradient(80% 80% at 50% 50%, #000, transparent);
+}
+.footer__map-pin {
+  position: absolute; top: 40%; left: 32%;
+  width: 16px; height: 16px; border-radius: 50% 50% 50% 0;
+  background: var(--hornbill);
+  transform: rotate(-45deg);
+  box-shadow: 0 0 0 5px color-mix(in srgb, var(--hornbill) 28%, transparent);
+}
+.footer__map-label {
+  position: relative; z-index: 1;
+  margin: 0.9rem; padding: 0.4rem 0.8rem;
+  background: color-mix(in srgb, var(--paper) 92%, #fff);
+  color: var(--ink); border-radius: 999px;
+  font-size: 0.78rem; font-weight: 600;
+  box-shadow: var(--shadow-sm);
+}
+@media (hover: hover) and (pointer: fine) {
+  .footer__map:hover { transform: translateY(-2px); border-color: var(--casque); }
+}
+
+.footer__bar {
+  border-top: 1px solid color-mix(in srgb, var(--paper) 12%, transparent);
+  padding: 1.4rem clamp(1.25rem, 5vw, 3rem);
+  max-width: var(--maxw);
+  margin-inline: auto;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  font-size: 0.76rem;
+  color: color-mix(in srgb, var(--paper) 55%, transparent);
+  font-family: var(--mono);
+  letter-spacing: 0.04em;
+}

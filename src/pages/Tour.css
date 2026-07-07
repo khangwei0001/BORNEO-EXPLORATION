@@ -1,0 +1,137 @@
+/* ============================================================
+   TOUR — Series Group / Pilgrimage / World Cruises (oceanic)
+   ============================================================ */
+.tour { position: relative; }
+
+/* ---------- HERO ---------- */
+.tour-hero {
+  position: relative;
+  min-height: 88svh;
+  display: flex;
+  align-items: center;
+  color: var(--paper);
+  overflow: hidden;
+  isolation: isolate;
+}
+.tour-hero__bg { position: absolute; inset: 0; z-index: -3; }
+.tour-hero__bg img { width: 100%; height: 100%; object-fit: cover; transform: scale(1.05); }
+.tour-hero__bg::after {
+  content: '';
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(180deg, rgba(9,40,52,0.72) 0%, rgba(9,40,52,0.35) 40%, rgba(9,30,42,0.86) 100%),
+    radial-gradient(90% 70% at 80% 20%, rgba(21,154,156,0.4), transparent 60%);
+}
+.tour-hero__inner { position: relative; z-index: 1; max-width: var(--maxw); margin-inline: auto; width: 100%; padding: 7rem clamp(1.25rem, 5vw, 3rem) 4rem; }
+.tour-hero h1 { color: var(--paper); max-width: 16ch; margin: 1.4rem 0; }
+.tour-hero h1 .accent { font-style: italic; color: var(--casque); font-weight: 400; }
+.tour-hero__lead { color: color-mix(in srgb, var(--paper) 88%, transparent); max-width: 58ch; font-size: clamp(1rem, 1.4vw, 1.18rem); }
+.tour-hero__jump { display: flex; gap: 0.6rem; margin-top: 2.2rem; flex-wrap: wrap; }
+.tour-hero__jump a {
+  padding: 0.7rem 1.2rem; border-radius: 999px; font-weight: 600; font-size: 0.9rem;
+  background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.24); color: var(--paper);
+  backdrop-filter: blur(6px);
+  transition: transform 180ms var(--ease-out), background-color 220ms ease, color 220ms ease;
+}
+@media (hover:hover) and (pointer:fine){ .tour-hero__jump a:hover { background: var(--casque); color: var(--ink); } }
+.tour-hero__jump a:active { transform: scale(0.96); }
+
+/* ---------- CONTINENTS SELECTOR ---------- */
+.continents { position: relative; background: linear-gradient(180deg, var(--paper), var(--paper-2)); overflow: hidden; }
+.continents__stage {
+  position: relative;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  aspect-ratio: 16 / 8.5;
+  box-shadow: var(--shadow-lg);
+  background: var(--ink-2);
+  margin-top: 1rem;
+}
+@media (max-width: 700px){ .continents__stage { aspect-ratio: 4 / 5; } }
+.continents__img {
+  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+  opacity: 0; transform: scale(1.06); filter: blur(10px);
+  transition: opacity 640ms var(--ease-out), transform 1000ms var(--ease-out), filter 640ms var(--ease-out);
+}
+.continents__img.active { opacity: 1; transform: scale(1); filter: blur(0); }
+.continents__stage::after { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(9,30,42,0.85) 0%, rgba(9,30,42,0.2) 46%, transparent 70%); }
+.continents__cap { position: absolute; left: clamp(1.4rem, 4vw, 3rem); top: 50%; transform: translateY(-50%); z-index: 2; max-width: 30ch; color: var(--paper); }
+.continents__cap .idx { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.16em; color: var(--casque); }
+.continents__cap h3 { color: var(--paper); font-size: clamp(2rem, 4.5vw, 3.4rem); line-height: 1; margin: 0.4rem 0 0.8rem; }
+.continents__cap p { color: color-mix(in srgb, var(--paper) 86%, transparent); font-size: 1rem; }
+.continents__cap .btn { margin-top: 1.4rem; }
+
+.continents__orbs { display: flex; gap: 0.7rem; justify-content: center; flex-wrap: wrap; margin-top: 1.6rem; }
+.orb {
+  display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+  padding: 0.5rem; border-radius: 16px; min-width: 92px;
+  transition: transform 200ms var(--ease-out);
+}
+.orb__ring {
+  width: 62px; height: 62px; border-radius: 50%;
+  display: grid; place-items: center; overflow: hidden;
+  box-shadow: inset 0 0 0 2px color-mix(in srgb, var(--ink) 14%, transparent);
+  position: relative;
+  transition: box-shadow 240ms var(--ease-out), transform 240ms var(--ease-out);
+}
+.orb__ring img { width: 100%; height: 100%; object-fit: cover; }
+.orb__label { font-size: 0.78rem; font-weight: 600; color: var(--muted); transition: color 200ms ease; text-align: center; }
+.orb.active .orb__ring { box-shadow: 0 0 0 3px var(--casque), var(--shadow-md); transform: translateY(-3px); }
+.orb.active .orb__label { color: var(--hornbill); }
+@media (hover:hover) and (pointer:fine){ .orb:hover .orb__ring { transform: translateY(-3px); } }
+.orb:active { transform: scale(0.96); }
+
+/* ---------- PILGRIMAGE ---------- */
+.pilg { position: relative; background: radial-gradient(120% 80% at 50% 0%, #1a2f4a 0%, #0e1f33 60%, #0a1626 100%); color: var(--paper); overflow: hidden; }
+.pilg::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(60% 50% at 50% -10%, rgba(246,200,119,0.35), transparent 60%);
+  pointer-events: none;
+}
+.pilg .container { position: relative; z-index: 1; }
+.pilg__grid { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: clamp(2rem, 5vw, 4rem); align-items: center; }
+@media (max-width: 900px){ .pilg__grid { grid-template-columns: 1fr; } }
+.pilg__poster { position: relative; border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-lg); border: 4px solid color-mix(in srgb, var(--casque) 55%, #fff); }
+.pilg__poster img { width: 100%; aspect-ratio: 3 / 4.2; object-fit: cover; display: block; }
+.pilg__copy .eyebrow { color: var(--casque); }
+.pilg__copy h2 { color: var(--paper); margin: 1rem 0; }
+.pilg__copy p { color: color-mix(in srgb, var(--paper) 84%, transparent); }
+.pilg__years { display: flex; gap: 0.6rem; margin: 1.4rem 0; flex-wrap: wrap; }
+.pilg__year { font-family: var(--mono); font-size: 0.9rem; padding: 0.5rem 1rem; border-radius: 12px; border: 1px solid color-mix(in srgb, var(--casque) 40%, transparent); color: var(--casque); }
+.pilg__note { display: flex; align-items: center; gap: 0.6rem; margin: 1.2rem 0 1.8rem; font-size: 0.95rem; color: color-mix(in srgb, var(--paper) 90%, transparent); }
+.pilg__gallery {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-top: 3rem;
+}
+@media (max-width: 900px){ .pilg__gallery { grid-template-columns: repeat(2, 1fr); } }
+.pilg__shot { position: relative; border-radius: 120px 120px 14px 14px; overflow: hidden; box-shadow: var(--shadow-md); aspect-ratio: 3 / 4; }
+.pilg__shot img { width: 100%; height: 100%; object-fit: cover; transition: transform 700ms var(--ease-out); }
+.pilg__shot::after { content: ''; position: absolute; inset: 0; box-shadow: inset 0 0 0 2px color-mix(in srgb, var(--casque) 30%, transparent); border-radius: inherit; }
+@media (hover:hover) and (pointer:fine){ .pilg__shot:hover img { transform: scale(1.08); } }
+
+/* ---------- WORLD CRUISES ---------- */
+.wcruise { position: relative; background: linear-gradient(180deg, #0d3b46, #0e6f70 60%, #0a4f56); color: var(--paper); overflow: hidden; }
+.wcruise .sec-head h2 { color: var(--paper); }
+.wcruise .sec-head .lead { color: color-mix(in srgb, var(--paper) 82%, transparent); }
+.wcruise__logos { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; margin: 0 0 2.5rem; }
+.wcruise__logo {
+  background: #fff; border-radius: 16px; padding: 1rem 1.4rem;
+  display: grid; place-items: center; min-width: 150px; height: 84px;
+  box-shadow: var(--shadow-md);
+  transition: transform 240ms var(--ease-out);
+}
+.wcruise__logo img { max-height: 52px; max-width: 130px; object-fit: contain; }
+@media (hover:hover) and (pointer:fine){ .wcruise__logo:hover { transform: translateY(-5px); } }
+.wcruise__strip {
+  display: flex; gap: 1.2rem; overflow-x: auto; padding: 0.5rem clamp(1.25rem,5vw,3rem) 1.5rem;
+  scroll-snap-type: x mandatory; scrollbar-width: none;
+}
+.wcruise__strip::-webkit-scrollbar { display: none; }
+.wcruise__card {
+  position: relative; flex: 0 0 clamp(320px, 60vw, 640px); aspect-ratio: 16 / 7;
+  border-radius: var(--radius-lg); overflow: hidden; scroll-snap-align: center;
+  box-shadow: var(--shadow-lg); transition: transform 420ms var(--ease-out);
+}
+.wcruise__card img { width: 100%; height: 100%; object-fit: cover; transition: transform 800ms var(--ease-out); }
+.wcruise__card::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 55%, rgba(9,30,42,0.7)); }
+@media (hover:hover) and (pointer:fine){ .wcruise__card:hover { transform: translateY(-6px); } .wcruise__card:hover img { transform: scale(1.06); } }
+.wcruise__cta { text-align: center; margin-top: 2.5rem; }

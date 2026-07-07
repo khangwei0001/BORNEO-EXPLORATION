@@ -1,0 +1,55 @@
+.ambient {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+/* Soft drifting mist / canopy light */
+.ambient__mist {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  will-change: transform, opacity;
+  animation: mist var(--mist-dur, 26s) var(--ease-in-out) infinite;
+}
+
+/* Drifting leaves */
+.drift-leaf {
+  position: absolute;
+  top: -10vh;
+  will-change: transform, opacity;
+  animation: drift-leaf var(--leaf-dur, 26s) linear infinite;
+  animation-delay: var(--leaf-delay, 0s);
+}
+
+/* Fireflies / pollen motes */
+.firefly {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--fly-color, #f6c877) 0%, transparent 70%);
+  filter: blur(0.4px);
+  will-change: transform, opacity;
+  animation: firefly var(--fly-dur, 7s) var(--ease-in-out) infinite;
+  animation-delay: var(--fly-delay, 0s);
+}
+
+/* Hornbill gliding along a motion path (hero signature) */
+.hornbill-fly {
+  position: absolute;
+  top: 0; left: 0;
+  width: 92px;
+  color: var(--ink);
+  offset-path: path('M-120 120 C 200 40, 520 220, 900 90 S 1500 40, 1700 160');
+  offset-rotate: auto;
+  animation: hornbill-glide var(--fly-path-dur, 22s) var(--ease-in-out) infinite;
+  will-change: offset-distance, opacity;
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ambient__mist { animation: none; }
+}
