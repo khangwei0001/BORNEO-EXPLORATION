@@ -31,8 +31,8 @@ Thumbs.db
 
 # Temporary files
 temporary screenshots/
-*.png
-*.jpg
+# *.png
+# *.jpg
 
 # Optional npm cache
 .npm
