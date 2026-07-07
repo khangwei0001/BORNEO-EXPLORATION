@@ -3,6 +3,7 @@ import { asset } from '../lib/assets'
 import { useReveal } from '../lib/useReveal'
 import Ambient from '../components/Ambient'
 import { ArrowRight, Compass, Waves, SocialIcon } from '../components/Shapes'
+import Typewriter from '../components/Typewriter'
 import './Tour.css'
 
 const CONTINENTS = [
@@ -44,18 +45,15 @@ export default function Tour() {
       {/* ---------------- HERO ---------------- */}
       <header className="tour-hero">
         <div className="tour-hero__bg">
-          <img src={asset('series-group-tour/continents.avif')} alt="Destinations across the world" />
+          <img src={asset('series-group-tour/continents.avif')} style={{ filter: 'blur(5px)' }} alt="Destinations across the world" />
         </div>
         <div className="tour-hero__inner">
-          <span className="eyebrow" style={{ color: 'var(--casque)' }}>Series Group · Pilgrimage · World Cruises</span>
-          <h1 className="display-xl">
+          <span className="eyebrow hero-eyebrow" style={{ color: 'var(--casque)' }}>Series Group · Pilgrimage · World Cruises</span>
+          <h1 className="display-xl hero-title">
             One agency, <span className="accent">seven</span> continents.
           </h1>
           <p className="tour-hero__lead">
-            Planning your next adventure? Our Series Group Tours span Asia, Africa, North and South
-            America, Antarctica, Europe and Australia / Oceania. If planning the trip seems like more
-            work than the holiday itself — you’ve come to the right place. Our travel executives are
-            ready to serve you.
+            <Typewriter text="Planning your next adventure? Our Series Group Tours span Asia, Africa, North and South America, Antarctica, Europe and Australia / Oceania. If planning the trip seems like more work than the holiday itself — you’ve come to the right place. Our travel executives are ready to serve you." />
           </p>
           <nav className="tour-hero__jump">
             <a href="#continents">Series Group Tours</a>
@@ -95,7 +93,7 @@ export default function Tour() {
             </div>
           </div>
 
-          <div className="continents__orbs">
+          <div className="continents__orbs reveal-stagger">
             {CONTINENTS.map((c, i) => (
               <button
                 key={c.id}
@@ -160,7 +158,7 @@ export default function Tour() {
               names travellers trust most. Choose your fleet — we’ll chart the course.
             </p>
           </div>
-          <div className="wcruise__logos reveal">
+          <div className="wcruise__logos reveal-stagger">
             {CRUISE_LOGOS.map((l) => (
               <div className="wcruise__logo" key={l.alt}>
                 <img src={asset(l.src)} alt={l.alt} loading="lazy" />
@@ -168,7 +166,7 @@ export default function Tour() {
             ))}
           </div>
         </div>
-        <div className="wcruise__strip reveal">
+        <div className="wcruise__strip reveal-stagger">
           {CRUISE_SHOTS.map((s, i) => (
             <div className="wcruise__card" key={s}>
               <img src={asset(s)} alt={`Cruise ship ${i + 1}`} loading="lazy" />

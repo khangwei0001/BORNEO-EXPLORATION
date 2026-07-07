@@ -182,6 +182,8 @@
 }
 
 @media (max-width: 1080px) {
-  .nav__menu, .nav__cta { display: none; }
-  .nav__burger { display: flex; }
+  /* Scope under .nav so these beat single-class globals like .btn
+     (which sets display:inline-flex on the CTA) regardless of bundle order. */
+  .nav .nav__menu, .nav .nav__cta { display: none; }
+  .nav .nav__burger { display: flex; }
 }

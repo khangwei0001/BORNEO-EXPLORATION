@@ -97,7 +97,10 @@
 .pilg__copy h2 { color: var(--paper); margin: 1rem 0; }
 .pilg__copy p { color: color-mix(in srgb, var(--paper) 84%, transparent); }
 .pilg__years { display: flex; gap: 0.6rem; margin: 1.4rem 0; flex-wrap: wrap; }
-.pilg__year { font-family: var(--mono); font-size: 0.9rem; padding: 0.5rem 1rem; border-radius: 12px; border: 1px solid color-mix(in srgb, var(--casque) 40%, transparent); color: var(--casque); }
+.pilg__year { font-family: var(--mono); font-size: 0.9rem; padding: 0.5rem 1rem; border-radius: 12px; border: 1px solid color-mix(in srgb, var(--casque) 40%, transparent); color: var(--casque); transition: transform 200ms var(--ease-out), background-color 220ms ease, border-color 220ms ease; }
+@media (hover:hover) and (pointer:fine){
+  .pilg__year:hover { transform: translateY(-2px); background: color-mix(in srgb, var(--casque) 12%, transparent); border-color: var(--casque); }
+}
 .pilg__note { display: flex; align-items: center; gap: 0.6rem; margin: 1.2rem 0 1.8rem; font-size: 0.95rem; color: color-mix(in srgb, var(--paper) 90%, transparent); }
 .pilg__gallery {
   display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-top: 3rem;

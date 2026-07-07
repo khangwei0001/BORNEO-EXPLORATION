@@ -171,7 +171,7 @@ h1, h2, h3, h4 {
 }
 .btn .arrow { transition: transform 220ms var(--ease-out); }
 @media (hover: hover) and (pointer: fine) {
-  .btn:hover { box-shadow: var(--shadow-warm); }
+  .btn:hover { transform: translateY(-2px); box-shadow: var(--shadow-warm); }
   .btn:hover .arrow { transform: translateX(4px); }
 }
 .btn:active { transform: scale(0.97); }
@@ -221,8 +221,66 @@ h1, h2, h3, h4 {
 }
 .reveal.is-visible { opacity: 1; transform: none; }
 
+/* Staggered container: children cascade in as the container enters view.
+   Animates the individual `translate` property (not `transform`) so it
+   composes with any resting card tilt/rotation instead of overriding it. */
+.reveal-stagger > * { opacity: 0; }
+.reveal-stagger.is-visible > * { animation: reveal-rise 620ms var(--ease-out) both; }
+.reveal-stagger.is-visible > *:nth-child(1) { animation-delay: 0ms; }
+.reveal-stagger.is-visible > *:nth-child(2) { animation-delay: 55ms; }
+.reveal-stagger.is-visible > *:nth-child(3) { animation-delay: 110ms; }
+.reveal-stagger.is-visible > *:nth-child(4) { animation-delay: 165ms; }
+.reveal-stagger.is-visible > *:nth-child(5) { animation-delay: 220ms; }
+.reveal-stagger.is-visible > *:nth-child(6) { animation-delay: 275ms; }
+.reveal-stagger.is-visible > *:nth-child(7) { animation-delay: 330ms; }
+.reveal-stagger.is-visible > *:nth-child(n+8) { animation-delay: 380ms; }
+
+@keyframes reveal-rise {
+  from { opacity: 0; translate: 0 24px; }
+  to   { opacity: 1; translate: none; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .reveal { opacity: 1; transform: none; transition: opacity 300ms ease; }
+  .reveal-stagger > *,
+  .reveal-stagger.is-visible > * { opacity: 1; translate: none; animation: none; }
+}
+
+/* ============================================================
+   HERO ENTRANCE  (title slides + un-blurs; eyebrow rises)
+   ============================================================ */
+.hero-eyebrow { animation: hero-rise 720ms var(--ease-out) 40ms both; }
+.hero-title   { animation: hero-title-in 1000ms var(--ease-out) 200ms both; will-change: transform, filter, opacity; }
+
+@keyframes hero-rise {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes hero-title-in {
+  0%   { opacity: 0; transform: translateY(32px); filter: blur(12px); }
+  55%  { filter: blur(0); }
+  100% { opacity: 1; transform: none; filter: blur(0); }
+}
+
+/* ============================================================
+   TYPEWRITER  (hero descriptions)
+   ============================================================ */
+.tw { position: relative; }
+.tw__ghost { opacity: 0; }              /* reserves the full line box — no reflow */
+.tw__caret {
+  display: inline-block;
+  width: 0.07em; height: 1.05em;
+  background: var(--casque);
+  margin-inline: 0.06em -0.01em;
+  vertical-align: -0.15em;
+  border-radius: 1px;
+  animation: tw-blink 1s steps(1, end) infinite;
+}
+@keyframes tw-blink { 0%, 50% { opacity: 1; } 50.01%, 100% { opacity: 0; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-eyebrow, .hero-title { animation: none; }
+  .tw__caret { display: none; }
 }
 
 /* ============================================================

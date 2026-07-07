@@ -12,7 +12,7 @@ export function useReveal<T extends HTMLElement = HTMLDivElement>() {
     const root = ref.current
     if (!root) return
 
-    const targets = Array.from(root.querySelectorAll<HTMLElement>('.reveal'))
+    const targets = Array.from(root.querySelectorAll<HTMLElement>('.reveal, .reveal-stagger'))
     if (!targets.length) return
 
     if (

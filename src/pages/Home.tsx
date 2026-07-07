@@ -5,6 +5,7 @@ import { useReveal } from '../lib/useReveal'
 import { SOCIALS } from '../lib/site'
 import Ambient from '../components/Ambient'
 import Coverflow from '../components/Coverflow'
+import Typewriter from '../components/Typewriter'
 import {
   Search, SocialIcon, ArrowRight, Compass, Waves, Hornbill,
 } from '../components/Shapes'
@@ -68,14 +69,13 @@ export default function Home() {
         <Hornbill className="hero__hornbill" color="var(--casque)" />
 
         <div className="hero__inner">
-          <span className="eyebrow hero__eyebrow">01°33′N · 110°20′E · Kuching, Sarawak</span>
-          <h1 className="display-xl">
+          <span className="eyebrow hero__eyebrow hero-eyebrow">01°33′N · 110°20′E · Kuching, Sarawak</span>
+          <h1 className="display-xl hero-title">
             Chase the hornbill across <span className="accent">Borneo</span> &amp; beyond.
           </h1>
           <p className="hero__sub">Borneo Exploration · Tours &amp; Travel Sdn Bhd</p>
           <p className="hero__lead">
-            Ancient rainforests, longhouses full of stories, and horizons that stretch to the
-            seven seas. Since 1991 we’ve turned wanderlust into journeys worth remembering.
+            <Typewriter text="Ancient rainforests, longhouses full of stories, and horizons that stretch to the seven seas. Since 1991 we’ve turned wanderlust into journeys worth remembering." />
           </p>
 
           <form className="hero__search" onSubmit={(e) => e.preventDefault()} role="search">
@@ -164,7 +164,7 @@ export default function Home() {
             </p>
           </div>
         </div>
-        <div className="dest__strip reveal">
+        <div className="dest__strip reveal-stagger">
           {DESTINATIONS.map((d, i) => (
             <article className="dest__card" key={d.name}>
               <img src={asset(d.img)} alt={`${d.name}, ${d.country}`} loading="lazy" />
@@ -196,7 +196,7 @@ export default function Home() {
             </p>
           </div>
         </div>
-        <div className="posters__rack reveal">
+        <div className="posters__rack reveal-stagger">
           {POSTERS.map((p, i) => (
             <div className="poster" key={p} style={{ '--tilt': `${(i % 2 ? 1 : -1) * (1 + (i % 3))}deg` } as React.CSSProperties}>
               <img src={asset(p)} alt={`Tour package promotion ${i + 1}`} loading="lazy" />
@@ -259,7 +259,7 @@ export default function Home() {
               Reserve, Sarawak is a haven for nature lovers — and host to some of Malaysia’s most
               iconic festivals.
             </p>
-            <div className="welcome__stats">
+            <div className="welcome__stats reveal-stagger">
               <div className="welcome__stat"><div className="n">34+</div><div className="l">Ethnic tribes</div></div>
               <div className="welcome__stat"><div className="n">45</div><div className="l">Living dialects</div></div>
               <div className="welcome__stat"><div className="n">12</div><div className="l">Divisions</div></div>

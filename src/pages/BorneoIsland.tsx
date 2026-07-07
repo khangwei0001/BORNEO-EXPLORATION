@@ -1,9 +1,10 @@
-import { useMemo, useState, type CSSProperties } from 'react'
+import { useMemo, useRef, useState, type CSSProperties, type MouseEvent as ReactMouseEvent } from 'react'
 import { Link } from 'react-router-dom'
 import { asset } from '../lib/assets'
 import { useReveal } from '../lib/useReveal'
 import Ambient from '../components/Ambient'
 import { ArrowRight, BatikMotif, Hornbill } from '../components/Shapes'
+import Typewriter from '../components/Typewriter'
 import './BorneoIsland.css'
 
 const CREATURES = [
@@ -50,7 +51,32 @@ export default function BorneoIsland() {
   const batikVars = {
     '--batik': `url(${asset('borneo-island/assets/background2.jpg')})`,
     '--batik-gold': `url(${asset('borneo-island/assets/background5.jpg')})`,
+    '--floral': `url(${asset('borneo-island/assets/background4.jpg')})`,
+    '--panel': `url(${asset('borneo-island/assets/background5.jpg')})`,
+    // '--spirit': `url(${asset('borneo-island/assets/background6.webp')})`,
   } as CSSProperties
+
+  // Cursor-reactive floral backdrop for the "Uncover the best of Sarawak" section.
+  const exploreRef = useRef<HTMLElement>(null)
+  const rafId = useRef<number | null>(null)
+
+  const onExploreMove = (e: ReactMouseEvent<HTMLElement>) => {
+    const el = exploreRef.current
+    if (!el) return
+    const rect = el.getBoundingClientRect()
+    const x = ((e.clientX - rect.left) / rect.width) * 100
+    const y = ((e.clientY - rect.top) / rect.height) * 100
+    if (rafId.current) cancelAnimationFrame(rafId.current)
+    rafId.current = requestAnimationFrame(() => {
+      el.style.setProperty('--mx', `${x.toFixed(2)}%`)
+      el.style.setProperty('--my', `${y.toFixed(2)}%`)
+      el.style.setProperty('--active', '1')
+    })
+  }
+  const onExploreLeave = () => {
+    if (rafId.current) cancelAnimationFrame(rafId.current)
+    exploreRef.current?.style.setProperty('--active', '0')
+  }
 
   return (
     <div className="bi" ref={ref} style={batikVars}>
@@ -61,17 +87,14 @@ export default function BorneoIsland() {
         <div className="bi-hero__bg">
           <img src={asset('places - sarawak cultural village.png')} alt="Sarawak Cultural Village" />
         </div>
-        <div className="bi-hero__batik" />
+        {/* <div className="bi-hero__batik" /> */}
         <div className="bi-hero__inner">
-          <span className="eyebrow bi-hero__eyebrow">Sarawak · Sabah · Bumi Kenyalang</span>
-          <h1 className="display-xl">
+          <span className="eyebrow bi-hero__eyebrow hero-eyebrow">Sarawak · Sabah · Bumi Kenyalang</span>
+          <h1 className="display-xl hero-title">
             Gateway to <span className="accent">Borneo</span>.
           </h1>
           <p className="bi-hero__lead">
-            Discover the heart of Borneo through Sarawak and Sabah, where ancient rainforests,
-            diverse cultures and extraordinary wildlife converge. From Sarawak’s enchanting
-            traditions and hornbill-filled skies to Sabah’s majestic Mount Kinabalu and orangutan
-            sanctuaries — this is your portal to adventure, nature and timeless heritage.
+            <Typewriter text="Discover the heart of Borneo through Sarawak and Sabah, where ancient rainforests, diverse cultures and extraordinary wildlife converge. From Sarawak’s enchanting traditions and hornbill-filled skies to Sabah’s majestic Mount Kinabalu and orangutan sanctuaries — this is your portal to adventure, nature and timeless heritage." />
           </p>
           <div className="bi-hero__actions">
             <Link to="/tour" className="btn btn--gold">Explore Tour Packages <ArrowRight /></Link>
@@ -116,7 +139,21 @@ export default function BorneoIsland() {
       </section>
 
       {/* ---------------- FEATURE SWITCHER ---------------- */}
-      <section className="section explore" id="explore">
+      <section
+        className="section explore"
+        id="explore"
+        ref={exploreRef}
+        onMouseMove={onExploreMove}
+        onMouseLeave={onExploreLeave}
+      >
+        {/* Cursor-reactive traditional-floral backdrop */}
+        <div className="explore__decor" aria-hidden="true">
+          <div className="explore__spirit" />
+          <div className="explore__panel" />
+          <div className="explore__floral explore__floral--base" />
+          <div className="explore__floral explore__floral--glow" />
+          <div className="explore__veil" />
+        </div>
         <div className="container">
           <div className="sec-head reveal">
             <span className="eyebrow on-dark">Recommended Tours</span>

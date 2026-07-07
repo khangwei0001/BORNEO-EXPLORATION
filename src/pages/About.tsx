@@ -4,6 +4,7 @@ import { asset } from '../lib/assets'
 import { useReveal } from '../lib/useReveal'
 import Ambient from '../components/Ambient'
 import { Compass, ArrowRight, Hornbill } from '../components/Shapes'
+import Typewriter from '../components/Typewriter'
 import './About.css'
 
 const TIMELINE = [
@@ -49,8 +50,15 @@ const AWARDS = [
 export default function About() {
   const ref = useReveal<HTMLDivElement>()
 
+  // Vintage Borneo paintings, used purely as faint background decoration.
+  const aboutVars = {
+    '--decor-river': `url(${asset('about-us/assets/background3.jpg')})`,
+    '--decor-fern': `url(${asset('about-us/assets/background4.jpeg')})`,
+    '--decor-coast': `url(${asset('about-us/assets/background5.jpeg')})`,
+  } as CSSProperties
+
   return (
-    <div className="about" ref={ref}>
+    <div className="about" ref={ref} style={aboutVars}>
       <Ambient variant="sepia" leaves={false} />
 
       {/* ---------------- HERO ---------------- */}
@@ -59,13 +67,12 @@ export default function About() {
           <img src={asset('about-us/assets/background2.jpg')} alt="Antique nautical map of the age of exploration" />
         </div>
         <div className="ab-hero__inner">
-          <span className="eyebrow ab-hero__eyebrow">Our Story · Est. 1991</span>
-          <h1 className="display-xl">
+          <span className="eyebrow ab-hero__eyebrow hero-eyebrow">Our Story · Est. 1991</span>
+          <h1 className="display-xl hero-title">
             Three decades of <span className="accent">exploration</span>.
           </h1>
           <p className="ab-hero__lead">
-            From a small consultancy on the banks of the Sarawak River to a full-service travel house
-            trusted across the seven seas — this is the voyage of Borneo Exploration.
+            <Typewriter text="From a small consultancy on the banks of the Sarawak River to a full-service travel house trusted across the seven seas — this is the voyage of Borneo Exploration." />
           </p>
           <span className="ab-hero__est"><span className="rule" /> Kuching · Sarawak · East Malaysia</span>
         </div>
@@ -134,7 +141,7 @@ export default function About() {
             <span className="eyebrow" style={{ justifyContent: 'center' }}>Accreditations & Memberships</span>
             <h2 className="display-l">In good company.</h2>
           </div>
-          <div className="members__row reveal">
+          <div className="members__row reveal-stagger">
             <div className="members__badge"><img src={asset('about-us/assets/IATA.avif')} alt="IATA" loading="lazy" /></div>
             <div className="members__badge"><img src={asset('about-us/assets/MATTA.avif')} alt="MATTA" loading="lazy" /></div>
             <div className="members__badge"><img src={asset('about-us/assets/ASIA.avif')} alt="Association of Sarawak Inbound Agencies" loading="lazy" /></div>
@@ -152,6 +159,11 @@ export default function About() {
       <section className="ab-cta">
         <div className="container">
           <div className="ab-cta__card reveal">
+            <div
+              className="ab-cta__fresco"
+              aria-hidden="true"
+              style={{ backgroundImage: `url(${asset('about-us/assets/background1.avif')})` }}
+            />
             <h2 className="display-l">Let’s write your chapter next.</h2>
             <p>
               Three decades of local know-how and worldwide reach, at your service. Tell us where

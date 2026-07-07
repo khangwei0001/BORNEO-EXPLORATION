@@ -3,6 +3,7 @@ import { asset } from '../lib/assets'
 import { useReveal } from '../lib/useReveal'
 import Ambient from '../components/Ambient'
 import { Compass, ArrowRight } from '../components/Shapes'
+import Typewriter from '../components/Typewriter'
 import './VisaCenter.css'
 
 // Rotating rubber-stamp inks per card for that hand-stamped passport feel.
@@ -38,14 +39,12 @@ export default function VisaCenter() {
         <header className="visa-hero">
           <div className="visa-hero__top">
             <div>
-              <span className="eyebrow visa-hero__eyebrow">Visa Center · Passport to the World</span>
-              <h1 className="display-xl">
+              <span className="eyebrow visa-hero__eyebrow hero-eyebrow">Visa Center · Passport to the World</span>
+              <h1 className="display-xl hero-title">
                 Get <span className="accent">stamped</span> for anywhere.
               </h1>
               <p className="visa-hero__lead">
-                Entry rules change, paperwork tangles — we untangle it. Pick a destination below and
-                we’ll guide your visa from application to approval, so all that’s left to pack is
-                excitement.
+                <Typewriter text="Entry rules change, paperwork tangles — we untangle it. Pick a destination below and we’ll guide your visa from application to approval, so all that’s left to pack is excitement." />
               </p>
             </div>
             <div className="visa-hero__seal">
