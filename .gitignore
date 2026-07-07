@@ -43,4 +43,4 @@ temporary screenshots/
 # Puppeteer
 puppeteer-core/
 
-*.mp4
+# *.mp4
